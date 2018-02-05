@@ -14,6 +14,15 @@ class CatalogFunc extends Component {
         };
     }
 
+    componentDidMount(){
+        // GetTopFive().then(data => {
+        //         this.setState({
+        //             goods: data,
+        //         });
+        //         console.log(this.state.goods);
+        //     });
+    }
+
     Input(event){
         const req = (event.target.value);//.toLowerCase();
         this.setState({

@@ -13,6 +13,11 @@ body{
   text-align: center;
 }
 
+/*.App-logo {*/
+  /*animation: App-logo-spin infinite 20s linear;*/
+  /*height: 80px;*/
+/*}*/
+
 .App-header {
     height: 100px;
     font-size: 30px;
@@ -24,7 +29,13 @@ body{
     color: white;
 }
 
+/*.App-cont{*/
+  /*display: flex;*/
+/*}*/
+
 .App-menu{
+  /*width: 20%;*/
+  /*display: flex;*/
   margin: 0 auto;
 }
 
@@ -56,12 +67,27 @@ body{
 .App-catalog{
     width: auto;
     margin: 1%;
+    /*padding: 2%;*/
     display: flex;
     justify-content: center;
+    /*align-content: space-between;*/
     flex-wrap: wrap;
+    /*width: 80%;*/
 }
 
+/*.App-intro {*/
+  /*font-size: large;*/
+/*}*/
+
+/*@keyframes App-logo-spin {*/
+  /*from { transform: rotate(0deg); }*/
+  /*to { transform: rotate(360deg); }*/
+/*}*/
+
 .Cont{
+    /*width: 400px;*/
+    /*height: 400px;*/
+    /*border-radius: 50%;*/
     width: 240px;
     height: 340px;
     border-radius: 15px;
@@ -95,6 +121,13 @@ body{
 }
 
 .Cont-else{
+    /*visibility: hidden;*/
     font-size: 12px;
     margin: 1% 8%;
 }
+
+
+/*.Cont:hover{*/
+    /*box-shadow: 0 0 20px rgba(0,0,0,0.5);*/
+/*}*/
+
