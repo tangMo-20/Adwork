@@ -11,20 +11,6 @@ function ifNull(category) {
     else return category;
 }
 
-function OnContClick(goods) {
-    //let cont = document.getElementsByClassName('Cont');
-    //event.target.childNodes.style.visibility = "visible";
-    // let elem = event.target.document.getElementsByClassName('Cont-else');
-    //console.log(event.target);
-    // elem.style.visibility = "visible";
-    // cont.onclick = function(event) {
-    //     let elem = event.target.document.getElementsByClassName('Cont-else');
-    //     console.log(event.target);
-    //     elem.style.visibility = "visible";
-    // };
-    //Goods(true);
-}
-
 export const Menu = ({goods = []}) => {
     return (
         <div className="App-catalog">
@@ -37,21 +23,8 @@ export const Menu = ({goods = []}) => {
     )
 };
 
-// const VisibleComponent = ({visible, children: CHILD}) => {
-//     return (
-//         <div>
-//             {
-//                 visible ? CHILD : null
-//             }
-//         </div>
-//     )
-// };
-
 const Goods = ({good}) =>
-    <div className="Cont" onClick={OnContClick}>
-        {/*<VisibleComponent visible={visible}>*/}
-            {/*<div>I am visible</div>*/}
-        {/*</VisibleComponent>*/}
+    <div className="Cont">
         <p className='Cont-name-price'>{good.name}</p>
         <img src={"data:image/gif;base64," + good.productPhotos[0].largePhoto} alt=''/>
         <p className='Cont-name-price'>Price: ${ifNull(good.listPrice)}</p>
