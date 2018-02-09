@@ -9,7 +9,9 @@ import java.util.List;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+
     private static ProductServiceImpl productService;
+
     @Autowired
     private ProductDao productDao;
 
@@ -17,18 +19,6 @@ public class ProductServiceImpl implements ProductService {
         if (productService == null) {
             productService = this;
         }
-    }
-
-    public static synchronized ProductServiceImpl getInstance() {
-        if (productService == null) {
-            productService = new ProductServiceImpl();
-        }
-        return productService;
-    }
-
-    @Override
-    public List<Product> getAll() {
-        return productDao.getAll();
     }
 
     @Override
@@ -47,37 +37,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Integer create(Product value) {
-        return productDao.create(value);
+    public Integer addNewProduct(Product prod) {
+        return productDao.addNewProduct(prod);
     }
 
     @Override
-    public Product read(Integer key) {
-        return productDao.read(key);
-    }
-
-//    //@Override
-//    public Product read(String key) {
-//        return productDao.read(key);
-//    }
-
-//    @Override
-//    public void update(Product value) {
-//        productDao.update(value);
-//    }
-//
-//    @Override
-//    public void delete(String key) {
-//        productDao.delete(key);
-//    }
-
-    @Override
-    public <T> Product readBy(String fieldName, T value) {
-        return productDao.readBy(fieldName, value);
-    }
-
-    @Override
-    public <T> List<Product> readAllBy(String fieldName, T value) {
-        return productDao.readAllBy(fieldName, value);
+    public String deleteItem(String itemNumber) {
+        return productDao.deleteItem(itemNumber);
     }
 }

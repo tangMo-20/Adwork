@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.sql.Blob;
-
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor

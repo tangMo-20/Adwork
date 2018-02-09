@@ -14,8 +14,6 @@ public class ProductDaoImpl extends mainDao<Product> implements ProductDao {
 
     @Autowired
     private ProductPhotoDao productPhotoDao;
-    //private ProductPhotoDao productPhotoDao;
-
     private static ProductDaoImpl productDaoImpl;
     private static RowMapper<Product> rowMapper;
     private final String SQL_GET_PHOTOS = "SELECT ProductPhotoID FROM productproductphoto WHERE ProductID = ?";
@@ -37,7 +35,6 @@ public class ProductDaoImpl extends mainDao<Product> implements ProductDao {
                 product.setProductLine(rs.getString("ProductLine"));
                 product.setProductClass(rs.getString("Class"));
                 product.setProductStyle(rs.getString("Style"));
-
                 List<Integer> photoPhotoIDList = this.jdbcTemplate.queryForList(SQL_GET_PHOTOS, new Object[] {product.getId()}, Integer.class);
                 List<ProductPhoto> productPhotos = new ArrayList<>();
                 for (Integer id : photoPhotoIDList) {
@@ -49,23 +46,10 @@ public class ProductDaoImpl extends mainDao<Product> implements ProductDao {
         }
     }
 
-    public static synchronized ProductDaoImpl getInstance() {
-        if (productDaoImpl == null) {
-            productDaoImpl = new ProductDaoImpl();
-        }
-        return productDaoImpl;
-    }
-
     @Override
     public List<Product> getInStock() {
         String SQL_GET_NOT_NULL = "SELECT * FROM product WHERE FinishedGoodsFlag = 1";
         return jdbcTemplate.query(SQL_GET_NOT_NULL, getRowMapper());
-    }
-
-    @Override
-    public List<Product> getAll() {
-        String SQL_GET_ALL = "SELECT * FROM product";
-        return jdbcTemplate.query(SQL_GET_ALL, getRowMapper());
     }
 
     @Override
@@ -90,34 +74,22 @@ public class ProductDaoImpl extends mainDao<Product> implements ProductDao {
     }
 
     @Override
-    public Integer create(Product value) {
-        Integer id = super.create(value);
-//        for (Illustration illustration : value.getIllustrations()) {
-//        }
-        return id;
+    public Integer addNewProduct(Product prod){
+        return super.addNewProduct(prod);
     }
 
     @Override
     protected PreparedStatement createInsertStatement(Connection connection, Product value) throws SQLException {
-        String SQL_INSERT = "INSERT INTO product (Name, rowguid) values (?, ?) ON DUPLICATE KEY UPDATE Name = Name";
-        PreparedStatement ps = connection.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
+        String SQL_ADD = "INSERT INTO product (Name, ListPrice, Weight, Color, Size, ProductNumber, Style, Class) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = connection.prepareStatement(SQL_ADD, Statement.RETURN_GENERATED_KEYS);
         ps.setString(1, value.getName());
-//        ps.setString(2, value.getCatalogDescription());
-//        ps.setString(3, value.getInstruction());
-//        ps.setString(4, value.getRowguid());
-        return ps;
-    }
-
-    @Override
-    protected PreparedStatement createUpdateStatement(Connection connection, Product value) throws SQLException {
-        String SQL_UPDATE = "UPDATE product SET Name = ?, rowguid = ? WHERE ProductModelID = ?";
-        PreparedStatement ps = connection.prepareStatement(SQL_UPDATE);
-        ps.setString(1, value.getName());
-        ps.setInt(2, value.getId());
-//        ps.setString(2, value.getCatalogDescription());
-//        ps.setString(3, value.getInstruction());
-//        ps.setString(4, value.getRowguid());
-//        ps.setInt(5, value.getId());
+        ps.setDouble(2, value.getListPrice());
+        ps.setDouble(3, value.getProductWeight());
+        ps.setString(4, value.getColor());
+        ps.setString(5, value.getProductSize());
+        ps.setString(6, value.getProductNumber());
+        ps.setString(7, value.getProductStyle());
+        ps.setString(8, value.getProductClass());
         return ps;
     }
 }

@@ -19,23 +19,14 @@ public abstract class mainDao<V extends Entity<Integer>> implements dao<Integer,
 
     @Autowired
     protected JdbcTemplate jdbcTemplate;
-    private static final String SQL_SELECT_ALL = "SELECT * FROM %s";
     private static final String SQL_GET_BY = "SELECT * FROM %s WHERE %s = ?";
-    private static final String SQL_DELETE_BY_ID = "DELETE FROM %s WHERE %s = ?";
 
     public mainDao(V obj) {
         this.obj = obj;
     }
 
-    //@SuppressWarnings("unchecked")
     @Override
-    public List<V> getAll() {
-        String sql = String.format(SQL_SELECT_ALL, obj.getClass().getSimpleName().toLowerCase());
-        return jdbcTemplate.query(sql, getRowMapper());
-    }
-
-    @Override
-    public Integer create(V value) {
+    public Integer addNewProduct(V value) {
         KeyHolder keyHolder = new GeneratedKeyHolder();
         jdbcTemplate.update((con) -> createInsertStatement(con, value), keyHolder);
         int id = keyHolder.getKey().intValue();
@@ -44,20 +35,17 @@ public abstract class mainDao<V extends Entity<Integer>> implements dao<Integer,
     }
 
     @Override
+    public String deleteItem(String itemNumber) {
+        String SQL_DELETE = "DELETE FROM product WHERE ProductNumber = %s";
+        String sql = String.format(SQL_DELETE, itemNumber);
+        jdbcTemplate.update(sql);
+        return "Done";
+    }
+
+    @Override
     public V read(Integer key) {
         return readBy(obj.getClass().getSimpleName() + "ID", key);
     }
-
-//    @Override
-//    public void update(V value) {
-//        jdbcTemplate.update((con) -> createUpdateStatement(con, value));
-//    }
-//
-//    @Override
-//    public void delete(Integer key) {
-//        String sql = String.format(SQL_DELETE_BY_ID, obj.getClass().getSimpleName().toLowerCase(), obj.getClass().getSimpleName() + "ID");
-//        jdbcTemplate.update(sql, key);
-//    }
 
     @Override
     public <T> V readBy(String fieldName, T value) {
@@ -68,7 +56,6 @@ public abstract class mainDao<V extends Entity<Integer>> implements dao<Integer,
         return result.get(0);
     }
 
-    //@SuppressWarnings("unchecked")
     @Override
     public <T> List<V> readAllBy(String fieldName, T value) {
         String sql = String.format(SQL_GET_BY, obj.getClass().getSimpleName().toLowerCase(), fieldName);
@@ -77,5 +64,4 @@ public abstract class mainDao<V extends Entity<Integer>> implements dao<Integer,
 
     protected abstract RowMapper getRowMapper();
     protected abstract PreparedStatement createInsertStatement(Connection connection, V value) throws SQLException;
-    protected abstract PreparedStatement createUpdateStatement(Connection connection, V value) throws SQLException;
 }
