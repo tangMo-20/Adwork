@@ -1,0 +1,145 @@
+html{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+    min-height: 1000px;
+    height: max-content;
+    background: linear-gradient(to bottom, #191e2e, #feff43);
+}
+
+.App {
+  text-align: center;
+}
+
+.App-header {
+    font-size: 30px;
+}
+
+.App-title {
+    text-transform: uppercase;
+    margin: 2% 0 2% 0;
+    color: white;
+}
+
+.App-menu{
+  margin: 0 auto;
+}
+
+.App-search{
+  outline: none;
+  border: 0;
+  border-radius: 30px;
+  background-color: black;
+  color: white;
+  font-size: 30px;
+  padding: 0.5% 2%;
+  margin: 0 1% 1%;
+  transition: 0.3s;
+}
+
+.App-add-cont{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.App-add{
+    width: 250px;
+    outline: none;
+    border: 0;
+    border-radius: 30px;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    padding: 1.3%;
+    margin: 0.7%;
+    transition: 0.3s;
+}
+
+.Button{
+  cursor: pointer;
+}
+
+.App-search:hover{
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.App-add:hover{
+    box-shadow: 0 0 30px rgba(0,0,0,0.5);
+}
+
+.Button:active{
+  background-color: #272e26;
+  transition: 0s;
+}
+
+.App-catalog{
+    width: auto;
+    margin: 1%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.Cont-box{
+    width: 280px;
+    height: 420px;
+    padding: 0 0.5%;
+}
+
+.Cont{
+    width: auto;
+    min-height: 240px;
+    height: max-content;
+    border-radius: 50px;
+    margin: 2%;
+    padding: 2.5%;
+    background-color: black;
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.Cont:hover{
+    box-shadow: 0 0 30px rgba(0,0,0,1);
+}
+
+.Cont img{
+    border-radius: 30px;
+}
+
+.Cont p{
+    margin: 5% 0;
+}
+
+.Cont div{
+    margin: 5% 0;
+}
+
+.Cont-name-price{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.Cont-else{
+    font-size: 12px;
+    margin: 1% 8%;
+}
+
+.Button-delete{
+    outline: none;
+    border: 0;
+    border-radius: 30px;
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 1% 10%;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.Button-delete:hover{
+    box-shadow: 0 0 20px rgba(255, 255, 255, 1);
+}
